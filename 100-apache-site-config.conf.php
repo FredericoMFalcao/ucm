@@ -12,31 +12,6 @@
 	ServerAdmin webmaster@localhost
 	DocumentRoot <?=ROOT_FOLDER?>
 	
-    # AddHandler cgi-script .mp4
-    AddHandler cgi-script .sh
- 	AddType video/mp2t mp2t ts
- 	AddType audio/x-mpegurl m3u m3u8
-
-	<Location "/Files">
-		RewriteEngine on
-		RewriteRule ^(.*)$ /getFile.php [L,QSA]
-	</Location>
-
-	Alias /audio "/var/lib/asterisk/sounds/custom"
-	<Directory "/var/lib/asterisk/sounds/custom">
-	    Order allow,deny
-	    Allow from all
-	    # New directive needed in Apache 2.4.3: 
-	    Require all granted
-	    Options Indexes FollowSymLinks 
-            Options +ExecCGI
-	</Directory>
-	
-	AddHandler application/x-httpd-php .html
-	AddHandler application/x-httpd-php .xml
-
-	RewriteEngine on
-	RewriteRule /(.*)/phonebook.xml$ /phonebook.xml?phoneBookForUser=$1 [NE]
 
 
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
@@ -45,8 +20,8 @@
 	# modules, e.g.
 	#LogLevel info ssl:warn
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+	ErrorLog <?=ROOT_FOLDER?>/sys/prd/error.log
+	CustomLog <?=ROOT_FOLDER?>/sys/prd/access.log combined
 
 	# For most configuration files from conf-available/, which are
 	# enabled or disabled at a global level, it is possible to
